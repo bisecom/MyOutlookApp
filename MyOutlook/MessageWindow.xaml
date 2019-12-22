@@ -1,0 +1,164 @@
+﻿<Window x:Class="MyOutlook.MessageWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:MyOutlook"
+        mc:Ignorable="d"
+        Title="My Outlook" Height="600"
+	Width="700" Icon="Resources/Custom-Icon-Design-Pretty-Office-2-Message-already-read.ico" Loaded="UpdatingAddressesList">
+    <Grid
+		Background="#e6f2ff">
+        <Grid.RowDefinitions>
+            <RowDefinition
+				Height="30"></RowDefinition>
+            <RowDefinition
+				Height="25"></RowDefinition>
+            <RowDefinition
+				Height="25"></RowDefinition>
+            <RowDefinition
+				Height="25"></RowDefinition>
+            <RowDefinition
+				Height="25"></RowDefinition>
+            <RowDefinition
+				Height="25"></RowDefinition>
+            <RowDefinition
+				Height="*"></RowDefinition>
+        </Grid.RowDefinitions>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition
+				Width="100"></ColumnDefinition>
+            <ColumnDefinition
+				Width="100"></ColumnDefinition>
+            <ColumnDefinition />
+        </Grid.ColumnDefinitions>
+        <Menu
+			Height="25"
+			VerticalAlignment="Top"
+            FontWeight="Bold"
+			Grid.Column="0"
+			Grid.Row="0"
+			Grid.ColumnSpan="3"
+            Background="#b3d9ff"
+            >
+            <MenuItem
+				Header="File">
+                <MenuItem
+					Header="Save"></MenuItem>
+                <MenuItem
+					Header="Send"></MenuItem>
+                <MenuItem
+					Header="Attach File" Click="GettingFilePath"></MenuItem>
+                <Separator />
+                <MenuItem
+					Header="Exit" Click="CloseWindowClick"></MenuItem>
+            </MenuItem>
+            <MenuItem
+				Header="Settings">
+                <MenuItem Header="Increase Font Size" Click="IncreaseFontMenuClick"></MenuItem>
+                <MenuItem Header="Decrease Font Size" Click="DecreaseFontMenuClick"></MenuItem>
+            </MenuItem>
+            <MenuItem
+				Header="About"></MenuItem>
+        </Menu>
+        <Button
+			x:Name="SendButton"
+			Grid.Column="0"
+			Grid.Row="1"
+			Grid.RowSpan="5"
+			Content="Send"
+			Margin="5,0,5,5"
+            FontWeight="Bold"
+            Background="#cce6ff"
+            FontSize="14"
+			Click="SendButton_Click" />
+        <ComboBox
+			x:Name="FromCBox"
+			Grid.Column="1"
+            Background="#cce6ff" Grid.Row="1" SelectionChanged="FillInAddressFrom"/>
+        <TextBlock
+			x:Name="AddressFrom"
+			FontWeight="Bold"
+			Grid.Column="2"
+			Grid.Row="1">
+		</TextBlock>
+        <ComboBox
+			x:Name="WhomCBox"
+			Grid.Column="1"
+			Grid.Row="2" 
+            Background="#cce6ff" SelectionChanged="FillInAddressTo" 
+            />
+        <TextBox
+			x:Name="AddressWhom"
+			FontWeight="Bold"
+			Grid.Column="2"
+			Grid.Row="2"
+            ScrollViewer.VerticalScrollBarVisibility="Auto"
+			LostFocus="DataChangedWhomAddress" />
+        <ComboBox
+			x:Name="CopyCBox"
+			Grid.Column="1"
+			Grid.Row="3" 
+            Background="#cce6ff" SelectionChanged="FillInAddressCc" 
+            />
+        <TextBox
+			x:Name="AddressCopy"
+			FontWeight="Bold"
+			Grid.Column="2"
+			Grid.Row="3"
+            ScrollViewer.VerticalScrollBarVisibility="Auto"
+			LostFocus="DataChangedWhomCCAddress" />
+        <TextBlock
+			x:Name="MessageThemeLabel"
+			FontWeight="Bold"
+			Grid.Column="1"
+			Grid.Row="4"
+            HorizontalAlignment="Right"
+            VerticalAlignment="Center"
+            Margin="0,0,5,0"
+			Text="Theme:" />
+        <TextBox
+			x:Name="MessageTheme"
+			FontWeight="Bold"
+			Grid.Column="2"
+			Grid.Row="4"
+			Text="You can put here a theme" />
+        <TextBlock
+			x:Name="AttachmentsLabel"
+			FontWeight="Bold"
+			Grid.Column="1"
+			Grid.Row="5"
+            HorizontalAlignment="Right"
+            VerticalAlignment="Center"
+            Margin="0,0,5,0"
+			Text="Attachments:" />
+        <ListBox x:Name="AtatchmentsListBox" Grid.Column="2" Grid.Row="5" ScrollViewer.HorizontalScrollBarVisibility="Disabled" ScrollViewer.VerticalScrollBarVisibility="Visible">
+            <ListBox.ItemsPanel>
+                <ItemsPanelTemplate>
+                    <VirtualizingStackPanel IsItemsHost="True" Orientation="Horizontal"/>
+                </ItemsPanelTemplate>
+            </ListBox.ItemsPanel>
+            <ListBox.ContextMenu>
+                <ContextMenu>
+                    <MenuItem x:Name="DeleteMenuItem" Header="Удалить" Click="DeleteContextClick"></MenuItem>
+                </ContextMenu>
+            </ListBox.ContextMenu>
+        </ListBox>
+
+        <TextBox
+			x:Name="MessageBody"
+			FontSize="14"
+			Grid.Column="0"
+			Grid.Row="6"
+			Grid.ColumnSpan="3"
+			Margin="0,5,0,0"
+			SpellCheck.IsEnabled="True"
+			Language="ru-ru"
+			HorizontalAlignment="Stretch"
+			VerticalAlignment="Stretch"
+			TextWrapping="Wrap"
+			AcceptsReturn="True"
+			ScrollViewer.VerticalScrollBarVisibility="Auto"
+			Text="Here could be many text" />
+    </Grid>
+</Window>
